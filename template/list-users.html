@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AuthMe - Users</title>
+	<!-- Electron Security -->
+	<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</head>
+
+<body style="background-color: #e0fbfc;">
+
+	<div class="container">
+		<div class="row">
+			<div id="user1" class="col-3 text-center p-4" style="border-radius: 7%;">
+				<img src="../assets/images/John.jpg" height="100" width="100" id="picture" style="border-radius: 50%;">
+				<h4 class="text-white">John Doe</h4>
+			</div>
+			<div id="user2" class="col-3 text-center p-4" style="border-radius: 7%;">
+				<img src="../assets/images/Karen.jpg" height="100" width="100" id="picture" style="border-radius: 50%;">
+				<h4 class="text-white">Karen Hansen</h4>
+			</div>
+			<div id="user3" class="col-3 text-center p-4" style="border-radius: 7%;">
+				<img src="../assets/images/deadpool.jpeg" height="100" width="100" id="picture" style="border-radius: 50%;">
+				<h4 class="text-white">Deadpool</h4>
+			</div>
+		</div>
+	</div>
+
+	<!-- Bootstrap JS -->
+	<script src="../assets/libraries/bootstrap/jquery.min.js"></script>
+	<script src="../assets/libraries/bootstrap/popper.min.js"></script>
+	<script src="../assets/libraries/bootstrap/bootstrap.min.js"></script>
+
+	<!-- Color Thief -->
+	<script src="../assets/libraries/color-thief/color-thief.js"></script>
+
+	<!-- Grabbing the color of the photo -->
+	<script>
+		const colorThief = new ColorThief();
+		var imgs = document.getElementsByTagName("img");
+
+		var img1 = imgs[0];
+		var img2 = imgs[1];
+		var img3 = imgs[2];
+
+		// Make sure image is finished loading
+		if (img1.complete) {
+			var colors = colorThief.getColor(img1);
+			var user1 = document.getElementById("user1");
+			user1.style.backgroundColor = generateRGB(colors[0], colors[1], colors[2]);
+		} else {
+			image.addEventListener('load', function () {
+				var colors = colorThief.getColor(img1);
+				var user1 = document.getElementById("user1");
+				user1.style.backgroundColor = generateRGB(colors[0], colors[1], colors[2]);
+			});
+		}
+
+		if (img2.complete) {
+			var colors = colorThief.getColor(img2);
+			var user2 = document.getElementById("user2");
+			user2.style.backgroundColor = generateRGB(colors[0], colors[1], colors[2]);
+		} else {
+			image.addEventListener('load', function () {
+				var colors = colorThief.getColor(img2);
+				var user2 = document.getElementById("user2");
+				user2.style.backgroundColor = generateRGB(colors[0], colors[1], colors[2]);
+			});
+		}
+
+		if (img3.complete) {
+			var colors = colorThief.getColor(img3);
+			var user3 = document.getElementById("user3");
+			user3.style.backgroundColor = generateRGB(colors[0], colors[1], colors[2]);
+		} else {
+			image.addEventListener('load', function () {
+				var colors = colorThief.getColor(img3);
+				var user3 = document.getElementById("user3");
+				user3.style.backgroundColor = generateRGB(colors[0], colors[1], colors[2]);
+			});
+		}
+
+		function generateRGB(red, green, blue) {
+			return "#" + ((1 << 24) + (red << 16) + (green << 8) + blue).toString(16).slice(1);
+		}
+	</script>
+</body>
+
+</html>
